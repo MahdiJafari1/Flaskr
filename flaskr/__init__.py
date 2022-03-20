@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from . import db
-
+from . import auth
 
 def create_app(test_config=None):
     """
@@ -11,6 +11,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY="dev", DATABASE=os.path.join(app.instance_path, "flaskr.sqlite")
     )
+    app.register_blueprint(auth.bp)
     
     db.init_app(app)
 
